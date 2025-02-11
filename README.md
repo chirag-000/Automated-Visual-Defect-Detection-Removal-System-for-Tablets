@@ -117,3 +117,25 @@ Untill now we have implemented upto writing the predictions to the `data.txt` fi
     style SendSerial fill:#A8760F
     style RecvSTM fill:#A8760F
     style RotateServo fill:#BF7229
+```
+
+### 5. Communication with STM32
+The wxWidgets application running on the computer continuously reads the `data.txt` file and sends the prediction data (0 or 1) via serial communication to the STM32 microcontroller. <br>
+
+All you need to do to run this applicatio is open `waArduinoSerialGUI` in the [`lib`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/lib.7z) folder and select the port after connecting STM32 to the computer via USB cable. Make sure the `waArduinoSerialGUI` application and all the other files in `lib` folder are in the same folder. <br>
+
+**wxWidgets GUI Application**
+* File: [`main.cpp`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/main.cpp)
+* Purpose: Serial communication with STM32 using wxWidgets app
+* Key Features:
+    * Select serial port.
+    * Read data.txt for defect detection results.
+    * Send defect information to STM32 via Serial.
+
+**Serial Communication Logic**
+* File: [`serial.cpp`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/serial.cpp)
+* Purpose: Manages serial port connections and communication.
+* Key Features:
+    * Detects available COM ports.
+    * Reads data.txt only if modified.
+    * Sends data (1 or 0) to STM32 via serial communication.
