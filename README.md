@@ -4,7 +4,7 @@ The system uses machine learning, real-time communication, and embedded systems 
 ![System Overview](https://github.com/user-attachments/assets/16827f58-5657-4340-a0e0-da4cf24a2ba9 "System Overview")
 
 
-I have integrated a custom YOLOv8 model for visual inspection. The is designed to detect any defects in tablets moving along a conveyor belt and immediately remove the defective ones using a servo motor controlled by an STM32 microcontroller. Additionally, I established serial communication between the STM32 and a wxWidgets application (to send data from computer computer to STM32 via usb port), allowing for real-time defect logging and management.
+I have integrated a custom YOLOv8 model for visual inspection. The is designed to detect any defects in tablets moving along a conveyor belt and immediately remove the defective ones using a servo motor controlled by an STM32 microcontroller. Established serial communication between the STM32 and a wxWidgets application (to send data from computer computer to STM32 via usb port), allowing for real-time defect logging and management.
 
 ## Technologies Used
 * **Machine Learning**: YOLOv8 (Ultralytics) for building the defect detection model.
@@ -19,7 +19,7 @@ I have integrated a custom YOLOv8 model for visual inspection. The is designed t
 These steps represent the approach I followed to implement the system. However, other approaches or variations in hardware, software, and communication methods may also be used to achieve similar functionality.
 
 ### 1.  Dataset Creation
-* Used [Google's Teachable Machine](https://teachablemachine.withgoogle.com/train/) to capture images with three classes:
+* I used [Google's Teachable Machine](https://teachablemachine.withgoogle.com/train/) to capture images with three classes:
     * No-defect (normal tablets)
     * Defected (damaged tablets)
     * Background (null category)
@@ -27,7 +27,7 @@ These steps represent the approach I followed to implement the system. However, 
     and uploaded these images to Roboflow.
 * Performed annotation, labeling, augmentation, and preprocessing on Roboflow. For all these steps I followed this [tutorial](https://youtu.be/wuZtUMEiKWY?si=PZ66WE1yqIztybXL).
 * Dataset size: 11,832 images. The dataset can be accessed [here](https://universe.roboflow.com/fyp-qjwy0/tablet-defect-detection-er87f) by anyone.
-* Exported the dataset and loaded it into Google Colab for training.
+* Then exported the dataset and loaded it into Google Colab for training.
 
 ### 2.  Model Training & Exporting
 * Trained the custom YOLOv8 model on Google Colab using Ultralytics YOLOv8 framework. You can check out the code at [`defect_detection1.ipynb`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/defect_detection1.ipynb). I followed the same [tutorial](https://youtu.be/wuZtUMEiKWY?si=PZ66WE1yqIztybXL) mentioned above.
