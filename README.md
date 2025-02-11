@@ -139,3 +139,12 @@ All you need to do to run this applicatio is open `waArduinoSerialGUI` in the [`
     * Detects available COM ports.
     * Reads data.txt only if modified.
     * Sends data (1 or 0) to STM32 via serial communication.
+
+### 6. Defect Removal Mechanism (STM32 & Servo Motor Control)
+[`Arduino C++ program`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/servomotor.cpp) flashed to the STM32 microcontroller to:
+* Read data from the serial port and control the servo motor based on received data
+* If a defect (1) is detected:
+    * Wait 1 second to sync with conveyor motion.
+    * Rotate the servo motor by 130° to push the defected tablet off the belt.
+    * Return to default (0°) position.
+* If no defect (0), no action is taken.   
