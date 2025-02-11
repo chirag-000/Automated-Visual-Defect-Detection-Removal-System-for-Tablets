@@ -1,4 +1,6 @@
 # Automated-Visual-Defect-Detection-Removal-System-for-Tablets
+#### Video Demo
+
 The system uses machine learning, real-time communication, and embedded systems to perform defect detection and physical removal of defective tablets (specifically DOLO-650). This project demonstrates a prototype for integration of computer vision, microcontroller programming, and mechanical design for a complete automated manufacturing solution.
 
 ![System Overview](https://github.com/user-attachments/assets/16827f58-5657-4340-a0e0-da4cf24a2ba9 "System Overview")
