@@ -1,17 +1,17 @@
 # Automated-Visual-Defect-Detection-Removal-System-for-Tablets
 
-The system uses machine learning, real-time communication, and embedded systems to perform defect detection and physical removal of defective tablets (specifically DOLO-650). This project demonstrates a prototype for integration of computer vision, microcontroller programming, and mechanical design for a complete automated manufacturing solution.
+The system uses machine learning, real-time communication, and embedded systems to perform defect detection and physical removal of defective tablets (specifically DOLO-650). This project demonstrates a prototype for the integration of computer vision, microcontroller programming, and mechanical design for a complete automated manufacturing solution.
 
 ![System Overview](https://github.com/user-attachments/assets/16827f58-5657-4340-a0e0-da4cf24a2ba9 "System Overview")
 
-I have integrated a custom YOLOv8 model for visual inspection. The is designed to detect any defects in tablets moving along a conveyor belt and immediately remove the defective ones using a servo motor controlled by an STM32 microcontroller. Established serial communication between the STM32 and a wxWidgets application (to send data from computer computer to STM32 via usb port), allowing for real-time defect logging and management.
+I have integrated a custom YOLOv8 model for visual inspection. The system is designed to detect any defects in tablets moving along a conveyor belt and immediately remove the defective ones using a servo motor controlled by an STM32-F401RE microcontroller. Established serial communication between the microcontroller and a wxWidgets application (to send data from computer to STM32-F401RE via USB port), allowing for real-time defect logging and management.
 
 #### Video Demo
 
 ## Technologies Used
 * **Machine Learning**: YOLOv8 (Ultralytics) for building the defect detection model.
-* **Programming Languages**: Python (for ML inference), C++ (Arduino code for STM32), wxWidgets (C++ for GUI and serial communication).
-* **Embedded System**: STM32 microcontroller for controlling the servo motor.
+* **Programming Languages**: Python (for ML inference), C++ (Arduino code for STM32-F401RE microcontroller), wxWidgets (C++ for GUI and serial communication).
+* **Embedded System**: STM32-F401RE microcontroller for controlling the servo motor.
 * **Hardware**:
     * Conveyor system where tablet moves, built with wooden planks, wheels, DC motor, elastic belt...
     * USB camera for real-time image capture
@@ -32,7 +32,7 @@ These steps represent the approach I followed to implement the system. However, 
 * Then exported the dataset and loaded it into Google Colab for training.
 
 ### 2.  Model Training & Exporting
-* Trained the custom YOLOv8 model on Google Colab using Ultralytics YOLOv8 framework. You can check out the code at [`defect_detection1.ipynb`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/defect_detection1.ipynb). I followed the same [tutorial](https://youtu.be/wuZtUMEiKWY?si=PZ66WE1yqIztybXL) mentioned above.
+* Trained the custom YOLOv8 model on Google Colab using the Ultralytics YOLOv8 framework. You can check out the code at [`defect_detection1.ipynb`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/defect_detection1.ipynb). I followed the same [tutorial](https://youtu.be/wuZtUMEiKWY?si=PZ66WE1yqIztybXL) mentioned above.
 * Achieved 99.2% mAP (Mean Average Precision), in this [model](https://universe.roboflow.com/fyp-qjwy0/tablet-defect-detection-er87f/model/3).
 * Exported the trained [model (`best.pt`)](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/best.pt). Which can be done [this way](https://youtu.be/WbomGeoOT_k?t=20&si=TR5ZRDD82689muMX).
 
@@ -43,7 +43,7 @@ Assuming you have anaconda3 installed just import this [`environment.yml`](https
 Or follow any tutorial like [this](https://youtu.be/IHbJcOex6dk?t=318&si=qtvQ1Dr2ayxCmYeS), to run the model on your computer.
 
 ### 4. Real-Time Defect Detection
-Launch vscode in the conda env, run this is python script ([`script.py`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/script.py)) to:
+Launch VSCode in the conda env, and run this Python script ([`script.py`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/script.py)) to:
 * Load the YOLOv8 model and run inference.
 * Write detection results (1 for defected, 0 for non-defected) to data.txt.
 * Added a 1-second delay before writing to avoid redundant detections.
@@ -71,7 +71,7 @@ for result in results:
         time.sleep(1) # Introduce a delay
 ```
 #### Process Flowchart:
-Untill now we have implemented upto writing the predictions to the `data.txt` file, now this data should be sent to the STM32 via serial port to control the servo motor action accordingly, which is explained in the upcoming steps
+Untill now we have implemented upto writing the predictions to the `data.txt` file, now this data should be sent to the STM32-F401RE via serial port to control the servo motor action accordingly, which is explained in the upcoming steps
 
 ```mermaid
     flowchart TD
@@ -98,7 +98,7 @@ Untill now we have implemented upto writing the predictions to the `data.txt` fi
     
     ReadFile --> SendSerial[Send Data via Serial Port]
     
-    SendSerial --> RecvSTM[STM32 Receives Data]
+    SendSerial --> RecvSTM[STM32-F401RE Receives Data]
     
     RecvSTM --> CheckData{Check Data Value}
     
@@ -121,18 +121,18 @@ Untill now we have implemented upto writing the predictions to the `data.txt` fi
     style RotateServo fill:#BF7229
 ```
 
-### 5. Communication with STM32
-The wxWidgets application running on the computer continuously reads the `data.txt` file and sends the prediction data (0 or 1) via serial communication to the STM32 microcontroller. <br>
+### 5. Communication with STM32-F401RE Microcontroller
+The wxWidgets application running on the computer continuously reads the `data.txt` file and sends the prediction data (0 or 1) via serial communication to the microcontroller. <br>
 
-All you need to do to run this applicatio is open `waArduinoSerialGUI` in the [`lib`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/lib.7z) folder and select the port after connecting STM32 to the computer via USB cable. Make sure the `waArduinoSerialGUI` application and all the other files in `lib` folder are in the same folder. <br>
+To run this application open `waArduinoSerialGUI` in the [`lib`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/lib.7z) folder and select the port after connecting STM32-F401RE to the computer via USB cable. Make sure the `waArduinoSerialGUI` application and all the other files in `lib` folder are in the same folder. <br>
 
 **wxWidgets GUI Application**
 * File: [`main.cpp`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/main.cpp)
-* Purpose: Serial communication with STM32 using wxWidgets app
+* Purpose: Serial communication with STM32-F401RE using wxWidgets app
 * Key Features:
     * Select serial port.
     * Read data.txt for defect detection results.
-    * Send defect information to STM32 via Serial.
+    * Send defect information to STM32-F401RE via Serial.
 
 **Serial Communication Logic**
 * File: [`serial.cpp`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/serial.cpp)
@@ -140,13 +140,13 @@ All you need to do to run this applicatio is open `waArduinoSerialGUI` in the [`
 * Key Features:
     * Detects available COM ports.
     * Reads data.txt only if modified.
-    * Sends data (1 or 0) to STM32 via serial communication.
+    * Sends data (1 or 0) to STM32-F401RE via serial communication.
 
-### 6. Defect Removal Mechanism (STM32 & Servo Motor Control)
-[`Arduino C++ program`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/servomotor.cpp) flashed to the STM32 microcontroller to:
-* Read data from the serial port and control the servo motor based on received data
+### 6. Defect Removal Mechanism (STM32-F401RE & Servo Motor Control)
+[`Arduino C++ program`](https://github.com/chirag-000/Automated-Visual-Defect-Detection-and-Removal-System-for-Tablets/blob/main/servomotor.cpp) flashed to the STM32-F401RE microcontroller to:
+* Read data from the serial port and control the servo motor based on received data.
 * If a defect (1) is detected:
     * Wait 1 second to sync with conveyor motion.
-    * Rotate the servo motor by 130° to push the defected tablet off the belt.
+    * Rotate the servo motor by 130° to push the defective tablet off the belt.
     * Return to default (0°) position.
-* If no defect (0), no action is taken.   
+* If no defect (0), no action is taken.
