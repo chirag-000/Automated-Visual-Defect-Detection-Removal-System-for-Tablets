@@ -8,6 +8,12 @@ I have integrated a custom YOLOv8 model for visual inspection. The system is des
 
 #### Video Demo
 
+https://github.com/user-attachments/assets/bc851247-ee02-4825-903a-e4b063f14a0a
+
+![Screenshot 2025-02-01 234532](https://github.com/user-attachments/assets/426c16fe-370c-422e-824f-f448964dadcc)
+
+![Screenshot 2025-02-01 234221](https://github.com/user-attachments/assets/6b20289f-9f81-48f1-ab34-2604d7bc7024)
+
 ## Technologies Used
 * **Machine Learning**: YOLOv8 (Ultralytics) for building the defect detection model.
 * **Programming Languages**: Python (for ML inference), C++ (Arduino code for STM32-F401RE microcontroller), wxWidgets (C++ for GUI and serial communication).
