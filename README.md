@@ -8,11 +8,13 @@ I have integrated a custom YOLOv8 model for visual inspection. The system is des
 
 #### Video Demo
 
-https://github.com/user-attachments/assets/bc851247-ee02-4825-903a-e4b063f14a0a
+https://github.com/user-attachments/assets/ff81daae-0052-4d20-a0f9-05ed79b32695
 
 ![Screenshot 2025-02-01 234532](https://github.com/user-attachments/assets/426c16fe-370c-422e-824f-f448964dadcc)
 
 ![Screenshot 2025-02-01 234221](https://github.com/user-attachments/assets/6b20289f-9f81-48f1-ab34-2604d7bc7024)
+
+![Image 2025-02-02 at 12 45 51 AM](https://github.com/user-attachments/assets/7bb448e7-fe3f-480f-af2c-fc00cfcbbae3)
 
 ## Technologies Used
 * **Machine Learning**: YOLOv8 (Ultralytics) for building the defect detection model.
